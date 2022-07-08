@@ -23,7 +23,7 @@ set JVM_ARGS=%JVM_ARGS% -Djdk.lang.Process.allowAmbiguousCommands=true
 
 rem JVM_ARGS="$JVM_ARGS -XX:ReservedCodeCacheSize=512m"
 
-java %JVM_ARGS% -jar %__CD__%\bin\sbt-launch-0.13.6.jar %1
+java %JVM_ARGS% -jar %__CD__%\bin\sbt-launch-1.3.8.jar %1
 
 if %ERRORLEVEL% NEQ 0 goto Req
 goto :EOF

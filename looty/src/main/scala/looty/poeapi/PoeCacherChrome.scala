@@ -98,6 +98,14 @@ class PoeCacherChrome() extends PoeCacher {cacher =>
     def clearRealmOverride() = store.clear("realmOverride")
     def getRealmOverride(): Option[String] = store.get("realmOverride")
 
+    def setExportDelimiter(accountName: String) = store.set("exportDelimiter", accountName)
+    def clearExportDelimiter() = store.clear("exportDelimiter")
+    def getExportDelimiter(): Option[String] = store.get("exportDelimiter")
+
+    def setGoogleSheetID(accountName: String) = store.set("googleSheetID", accountName)
+    def clearGoogleSheetID() = store.clear("googleSheetID")
+    def getGoogleSheetID(): Option[String] = store.get("googleSheetID")
+
     def setAccountNameNet(accountName: String) = store.set("accountNameNet", accountName)
     def getAccountNameNet(): Option[String] = store.get("accountNameNet")
 
@@ -244,6 +252,19 @@ class PoeCacherChrome() extends PoeCacher {cacher =>
   override def setRealmOverride(realm: Option[String]): Unit = realm match {
     case Some(realm) => Store.setRealmOverride(realm)
     case None => Store.clearRealmOverride()
+  }
+
+
+  override def getExportDelimiter(): Option[String] = Store.getExportDelimiter()
+  override def setExportDelimiter(exportDelimiter: Option[String]): Unit = exportDelimiter match {
+    case Some(exportDelimiter) => Store.setExportDelimiter(exportDelimiter)
+    case None => Store.clearExportDelimiter()
+  }
+
+  override def getGoogleSheetID(): Option[String] = Store.getGoogleSheetID()
+  override def setGoogleSheetID(sheetID: Option[String]): Unit = sheetID match {
+    case Some(sheetID) => Store.setGoogleSheetID(sheetID)
+    case None => Store.clearGoogleSheetID()
   }
 
   override def init(implicit ec: ExecutionContext): Future[_] = {

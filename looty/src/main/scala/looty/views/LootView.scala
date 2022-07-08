@@ -16,6 +16,15 @@ import org.scalajs.dom.ext.KeyCode
 
 import scala.language.postfixOps
 
+// import js.annotation._
+
+// object DOMGlobalScope extends js.GlobalScope {
+//   def googleSheetsUpload(googleSheetID: String, data: String): Unit = js.native
+// }
+
+// @js.native
+// @JSImport("export.js", JSImport.Default)
+// object Export extends js.Object
 
 case class FilterCell(columnId: String, initValue: Option[String])(onChange: (String) => Unit) {
   val el = jq("<input class='header-filter' type='text'>")
@@ -222,26 +231,38 @@ class LootView(val league: League)(implicit val pc: PoeCacher) extends View {
       p.el.append(columnsPane.start())
       p
     }
-    controls.add("Export Csv", "export-csv") {
+    controls.add("Export", "export-csv") {
       val O = js.Dynamic.literal
       val cols = columns.all
-      val header = cols.map(_.fullName).mkString(",")
-      val rows = dataView.getItems().asJsArr[ComputedItem].toList.map { row =>
-        cols.map{ col =>
-          val v = ""+col.getJs(row)
-          if (v.contains(",")) {
-            //Quote items which contain a ,
-            val q = '"'
-            s"$q$v$q"
-          } else {
-            v
-          }
-        }.mkString(",")
+      val header = cols.map(_.fullName).mkString(delimiter)
+      val rows = dataView.getItems()
+        .asJsArr[ComputedItem]
+        .toList.map { row =>
+          cols.map{ col =>
+            val v = ""+col.getJs(row)
+            if (v.contains(delimiter)) {
+              //Quote items which contain a ,
+              val q = '"'
+              s"$q$v$q"
+            } else {
+              v
+            }
+          }.mkString(delimiter)
       }
       val csv = header + "\n" + rows.mkString("\n")
       val blob = new Blob(js.Array(csv), O(`type` = "text/plain;charset=utf-8").asInstanceOf[BlobPropertyBag])
-      global.saveAs(blob, "item-export.csv")
+      
+      val googleSheetID = pc.getGoogleSheetID()
+      googleSheetID match {
+        case Some(googleSheetID) =>
+          Alerter.info(s"Pushing data to Google Sheet: $googleSheetID.")
+          js.Dynamic.global.googleSheetsUpload(googleSheetID, csv)
+        case None =>
+          Alerter.info(s"Generating CSV.")
+          global.saveAs(blob, "item-export.csv")
+      }
     }
+
     controls.add {
       val p = loadSavePane.start()
       p

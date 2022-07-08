@@ -24,6 +24,12 @@ trait PoeCacher {
   def getRealmOverride() : Option[String]
   def setAccountNameOverride(accountName : Option[String]) : Unit
   def setRealmOverride(realm : Option[String]) : Unit
+
+  def getExportDelimiter() : Option[String]
+  def getGoogleSheetID() : Option[String]
+  def setExportDelimiter(realm : Option[String]) : Unit
+  def setGoogleSheetID(realm : Option[String]) : Unit
+
   def getAccountName : Future[String]
   def getRealm : Future[Option[String]]
   def getAccountNameAndRealm: Future[(String, Option[String])]

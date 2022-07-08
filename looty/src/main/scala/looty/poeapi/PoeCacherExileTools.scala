@@ -32,4 +32,8 @@ class PoeCacherExileTools extends PoeCacher {
   override def setRealmOverride(realm: Option[String]): Unit = ???
   override def getRealm : Future[Option[String]] = ???
   override def getAccountNameAndRealm: Future[(String, Option[String])] = ???
+  override def getExportDelimiter(): Option[String] = ???
+  override def setExportDelimiter(realm: Option[String]): Unit = ???
+  override def getGoogleSheetID(): Option[String] = ???
+  override def setGoogleSheetID(realm: Option[String]): Unit = ???
 }

@@ -73,6 +73,21 @@ class SettingsView(implicit val pc: PoeCacher) extends View {
     //display ggg like tooltip instead of standard
     Settings.insertHtmlElement(Settings.TOOLTIP_TEXT_ALIGN,Settings.TOOLTIP_TEXT_ALIGN_DESCR, el, "settingsOption")
 
+    locally {
+      val value = pc.getExportDelimiter().headOption
+      val setting = new Setting(value, pc.setExportDelimiter,
+        "CSV Export Delimiter", "Save",
+        "defaults to \",\"")
+      setting.insertInto(el)
+    }
+
+    locally {
+      val value = pc.getGoogleSheetID().headOption
+      val setting = new Setting(value, pc.setGoogleSheetID,
+        "Export To Google Sheet ID", "Verify",
+        "")
+      setting.insertInto(el)
+    }
   }
   override def stop(): Unit = {}
 }
