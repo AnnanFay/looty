@@ -217,6 +217,8 @@ object AffixesParser {
   regex1(s"^Recover ([.\\d]+)% of Energy Shield on Kill")(_.recoverOnKill.energyShield += _)
 
   chanceTo("Block Spell Damage")(_.chanceTo.blockSpellDamage += _)
+  chanceTo("Suppress Spell Damage")(_.chanceTo.suppressSpellDamage += _)
+
   chanceTo("Dodge Spell Hits")(_.chanceTo.dodgeSpellHits += _)
 
   increased("Attributes")(_.increased.attributes += _)

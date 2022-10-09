@@ -143,6 +143,7 @@ class ComputedItem(val item: AnyItem, val containerId: LootContainerId, val loca
   object chanceTo {
     var blockSpellDamage               = 0.0
     var dodgeSpellHits                 = 0.0
+    var suppressSpellDamage            = 0.0
   }
 
   object increased {

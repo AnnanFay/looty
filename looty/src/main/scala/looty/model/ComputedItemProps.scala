@@ -232,6 +232,7 @@ object ComputedItemProps {
   val IncreasedBlockAndStunRecovery = pno("IncreasedBlockAndStunRecovery", "+bsrec")(Defensive)(_.increased.blockAndStunRecovery)
   val DodgeSpellHits = pno("ChanceToDodgeSpellHits","%SpDgc")(Defensive)(_.chanceTo.dodgeSpellHits)
   val BlockSpellDamage = pno("ChanceToBlockSpellDamage","%SpBlkc")(Defensive)(_.chanceTo.blockSpellDamage)
+  val SuppressSpellDamage = pno("ChanceToSuppressSpellDamage","%SpSprs")(Defensive)(_.chanceTo.suppressSpellDamage)
 
 
   Armour ?= "Armour"
@@ -248,6 +249,7 @@ object ComputedItemProps {
   IncreasedBlockAndStunRecovery !?= "Increased Block and Stun Recovery"
   DodgeSpellHits !?= "Adds Chance to Dodge Spell Hits"
   BlockSpellDamage !?= "Adds Chance to Block Spell Damage"
+  SuppressSpellDamage !?= "Adds Chance to Suppress Spell Damage"
 
   //Attack
   val AttacksPerSecond     = pno("AttacksPerSecond", "aps")(Attack)(_.properties.attacksPerSecond)
