@@ -285,6 +285,20 @@ object AffixesParser {
   plusTo("Armour")(_.plusTo.armour += _)
   plusTo("Evasion Rating")(_.plusTo.evasionRating += _)
   plusTo("Energy Shield")(_.plusTo.energyShield += _)
+
+  plusTo("Armour and Evasion Rating") { (i, n) => 
+    i.plusTo.armour += n
+    i.plusTo.evasionRating += n
+  }
+  plusTo("Evasion Rating and Energy Shield") { (i, n) => 
+    i.plusTo.evasionRating += n
+    i.plusTo.energyShield += n
+  }
+  plusTo("Armour and Energy Shield") { (i, n) => 
+    i.plusTo.armour += n
+    i.plusTo.energyShield += n
+  }
+
   plusTo("maximum Energy Shield")(_.plusTo.energyShield += _)
   plusTo("Fire and Lightning Resistances") { (i, n) =>
     i.plusTo.resistance.fire += n
@@ -297,6 +311,18 @@ object AffixesParser {
   plusTo("Fire and Cold Resistances") { (i, n) =>
     i.plusTo.resistance.fire += n
     i.plusTo.resistance.cold += n
+  }
+  plusTo("Fire and Chaos Resistances") { (i, n) =>
+    i.plusTo.resistance.fire += n
+    i.plusTo.resistance.chaos += n
+  }
+  plusTo("Cold and Chaos Resistances") { (i, n) =>
+    i.plusTo.resistance.cold += n
+    i.plusTo.resistance.chaos += n
+  }
+  plusTo("Lightning and Chaos Resistances") { (i, n) =>
+    i.plusTo.resistance.lightning += n
+    i.plusTo.resistance.chaos += n
   }
   plusTo("all Elemental Resistances") { (i, n) =>
     i.plusTo.resistance.fire += n
