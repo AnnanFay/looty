@@ -206,8 +206,10 @@ object AffixesParser {
   }
 
   for (x <- LifeAndMana.all) {
-    regex1(s"^Regenerate ([.\\d]+) ${x.cap} per second")(_.regenPerSecond.flat.+=(x, _))
-    regex1(s"^Regenerate ([.\\d]+)% of ${x.cap} per second")(_.regenPerSecond.percent(x) += _)
+    regex1(s"^Regenerate ([.\\d]+) ${x.cap} per second$")(_.regenPerSecond.flat.+=(x, _))
+    regex1(s"^Regenerate ([.\\d]+)% of ${x.cap} per second$")(_.regenPerSecond.percent(x) += _)
+    // $ prevents 'while Frozen' and similar for being parsed
+    
     regex1(s"^([+-\\d]+) ${x.cap} [gG]ained on Kill")(_.onKill.lifeAndMana(x) += _)
     regex1(s"^Recover ([.\\d]+)% of ${x.cap} on Kill")(_.recoverOnKill.lifeAndMana(x) += _)
     regex1(s"^([+-\\.\\d]+)% of Physical Attack Damage Leeched as ${x.cap}")(_.leech.physical(x) += _)
