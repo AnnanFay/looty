@@ -404,6 +404,9 @@ object ComputedItemProps {
   PlusLightningResist ?= "The amount of lightning resistance"
   PlusChaosResist !?= "The amount of chaos resistance"
 
+  val PlusTotalResistCap  = pno("PlusTotalResistCap", "+SMRes")(Resists)(_.plusTo.totalResistanceCap)
+  PlusTotalResistCap ?= "The total amount of +maximum resistance"
+
   //Crit
   val IncreasedCritChance       = pno("IncreasedCritChance", "+%crit")(Crit)(_.properties.criticalStrikeChance)
   val IncreasedCritChanceSpells = pno("IncreasedCritChanceSpells", "+%spCrit")(Crit)(i => i.increased.globalCriticalStrikeChance + i.increased.criticalStrikeChanceForSpells)

@@ -191,9 +191,11 @@ object AffixesParser {
     allGemlevel(x.cap)(_.allGemLevel.attribute.+=(x, _))
   }
 
+  // loop over physical / fire / cold / lightning / chaos
   for (x <- Elements.all) {
     increased(s"${x.cap} Damage")(_.increased.damage.+=(x, _))
     plusTo(s"${x.cap} Resistance")(_.plusTo.resistance.+=(x, _))
+    plusTo(s"maximum ${x.cap} Resistance")(_.plusTo.resistanceCap.+=(x, _))
     addsDamage(x.cap)(_.damages(x).+=(_, _))
     addsDamage(x.cap, " to Attacks")(_.damages(x).+=(_, _))
     addsDamage(x.cap, " to Bow Attacks")(_.damagesWithBows(x).+=(_, _))
@@ -346,6 +348,7 @@ object AffixesParser {
     i.plusTo.attribute.dexterity += n
     i.plusTo.attribute.intelligence += n
   }
+
 
 
   reduced("Attribute Requirements")(_.reduced.attributeRequirements += _)

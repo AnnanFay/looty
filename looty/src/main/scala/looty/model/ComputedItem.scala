@@ -259,6 +259,8 @@ class ComputedItem(val item: AnyItem, val containerId: LootContainerId, val loca
     val resistance = Elements mutable 0.0
     def totalResistance = resistance.all.sum
     def maxResistance = resistance.all.max
+    val resistanceCap = Elements mutable 0.0
+    def totalResistanceCap = resistanceCap.all.sum
     val lifeAndMana = LifeAndMana mutable 0.0
     lazy val lifeAndManaWithStrInt = lifeAndMana.map2(_ + plusTo.attribute.strength * .5, _ + plusTo.attribute.intelligence * .5)
     var accuracyRating = 0.0
